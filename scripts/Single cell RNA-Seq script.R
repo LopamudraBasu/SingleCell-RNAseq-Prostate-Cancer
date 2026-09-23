@@ -1,3 +1,12 @@
+# ============================================================
+# GSE297652 Single-cell RNA-seq Analysis
+# Prostate Cancer
+#
+# ============================================================
+
+# ------------------------------------------------------------
+# Load required packages
+# ------------------------------------------------------------
 library(Seurat)
 library(Matrix)
 library(data.table)
@@ -9,6 +18,10 @@ library(dplyr)
 library(stringr)
 
 base_path <- "D:/Bioinfomatics_project/SingleCell-RNAseq-Prostate-Cancer/data"
+
+# ------------------------------------------------------------
+# Read 10X expression matrices for all five samples
+# ------------------------------------------------------------
 
 m1_counts <- Read10X(
   data.dir = file.path(base_path, "mPCa_M1_filtered_feature_bc_matrix")
@@ -29,14 +42,18 @@ m4_counts <- Read10X(
 m5_counts <- Read10X(
   data.dir = file.path(base_path, "mPCa_M5_filtered_feature_bc_matrix")
 )
-
+# Check matrix dimensions
 dim(m1_counts)
 dim(m2_counts)
 dim(m3_counts)
 dim(m4_counts)
 dim(m5_counts)
 
-library(data.table)
+
+# ------------------------------------------------------------
+# Read cell metadata
+# ------------------------------------------------------------
+
 
 metadata_file <- "D:/Bioinfomatics_project/SingleCell-RNAseq-Prostate-Cancer/data/GSE297652_cell_metadata.csv.gz"
 
@@ -46,6 +63,9 @@ dim(metadata)
 
 head(metadata)
 
+# ------------------------------------------------------------
+# Extract sample-specific cell barcodes
+# ------------------------------------------------------------
 
 m1_barcodes <- sub("^M1_", "", metadata[Sample == "M1", Barcode])
 m2_barcodes <- sub("^M2_", "", metadata[Sample == "M2", Barcode])
@@ -53,12 +73,16 @@ m3_barcodes <- sub("^M3_", "", metadata[Sample == "M3", Barcode])
 m4_barcodes <- sub("^M4_", "", metadata[Sample == "M4", Barcode])
 m5_barcodes <- sub("^M5_", "", metadata[Sample == "M5", Barcode])
 
+# ------------------------------------------------------------
+# Subset expression matrices to cells present in metadata
+# ------------------------------------------------------------
 m1_counts <- m1_counts[, m1_barcodes]
 m2_counts <- m2_counts[, m2_barcodes]
 m3_counts <- m3_counts[, m3_barcodes]
 m4_counts <- m4_counts[, m4_barcodes]
 m5_counts <- m5_counts[, m5_barcodes]
 
+# Check dimensions after subsetting
 dim(m1_counts)
 dim(m2_counts)
 dim(m3_counts)
