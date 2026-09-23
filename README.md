@@ -24,7 +24,7 @@ The analysis integrates five samples (**M1–M5**) and identifies distinct cellu
 ```text
 GSE297652
     │
-    ├── Raw 10X count matrices
+    ├── Filtered 10X count matrices
     │
     ├── Metadata integration
     │
