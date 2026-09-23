@@ -468,6 +468,3 @@ This project demonstrates an end-to-end single-cell RNA-seq analysis workflow us
 The resulting portfolio includes reproducible analysis code, publication-style visualizations, and structured result tables for downstream interpretation.
 
 ---
-
-
-And importantly: **don't add claims about treatment response, prognosis, biomarker discovery, clinical utility, or therapeutic targets**—your current analysis doesn't establish those things. This README stays within what your actual analysis supports.
